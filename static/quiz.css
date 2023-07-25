@@ -8,6 +8,14 @@
   justify-content: center;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* This will ensure that the body takes up at least the full height of the viewport */
+  margin: 0; /* Remove any default margin */
+}
 
 .home-page-code-currate-homepagecomplete {
   width: 100%;
@@ -181,15 +189,13 @@
   display: flex;
   flex-direction: column;
   align-items: center; /* This centers the elements horizontally */
-  position: relative;
 }
 
 .quiz-creation-container {
   /* Adjust the margin and padding to create space between the quiz form and output */
   margin-bottom: 20px;
   padding-bottom: 20px;
-  align-items:flex-end;
-
+  position: relative;
 }
 
 .quiz-output-container {
@@ -199,8 +205,13 @@
   background-color: #f7f7f7;
   padding: 20px;
   margin-top: 20px;
-  position: relative;
-  overflow: auto;
+  position: absolute; /* Take it out of normal flow */
+  top: 100%; /* Position its top edge at the bottom of its parent (.quiz-creation-container) */
+  left: 50%; /* Center it horizontally */
+  transform: translateX(-50%); /* Adjust for exact centering */
+  width: 80%; /* Or whatever width you prefer */
+
+
 }
 
 
