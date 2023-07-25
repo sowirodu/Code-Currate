@@ -7,13 +7,15 @@
   flex-direction: column;
   justify-content: center;
 }
+
+
 .home-page-code-currate-homepagecomplete {
   width: 100%;
   height: 1994px;
   display: flex;
+  align-items: center;
   overflow: hidden;
   position: relative;
-  align-items: center;
   flex-shrink: 0;
   justify-content: flex-start;
   background-color: rgba(255, 255, 255, 1);
@@ -179,12 +181,15 @@
   display: flex;
   flex-direction: column;
   align-items: center; /* This centers the elements horizontally */
+  position: relative;
 }
 
 .quiz-creation-container {
   /* Adjust the margin and padding to create space between the quiz form and output */
   margin-bottom: 20px;
   padding-bottom: 20px;
+  align-items:flex-end;
+
 }
 
 .quiz-output-container {
@@ -194,6 +199,8 @@
   background-color: #f7f7f7;
   padding: 20px;
   margin-top: 20px;
+  position: relative;
+  overflow: auto;
 }
 
 
@@ -204,5 +211,27 @@
   font-size: 18px;
   line-height: 1.6;
   color: #333;
+  
   /* Add other styles as needed */
 }
+
+.header-container {
+  background-color: rgba(255, 255, 255, 1); /* this sets a background to the header */
+  padding: 70px 0; /* some padding to make sure everything stays within this container */
+}
+
+
+.main-content-wrapper {
+  display: flex;
+  flex-direction: column; /* This assumes your main content flows vertically. If it's horizontal content, you can skip this property. */
+  align-items: center;    /* Center content horizontally */
+  justify-content: center; /* Center content vertically */
+  height: 100vh;          /* Take full viewport height; adjust if necessary */
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
