@@ -160,3 +160,35 @@ footer {
 }
 
 /* Add more styles, transitions, animations, etc. to enhance the design */
+.quiz-creation-container {
+    margin-top: -1500px;  /* Adjust this value as needed */
+	padding-right: 100px;
+  	padding-left: 150px;
+}
+
+.quiz-creation-container select,
+.quiz-creation-container input[type="number"] {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    border: 2px solid #cccccc; /* Default border color */
+    border-radius: 8px; /* This will create rounded corners */
+}
+
+.quiz-creation-container select:hover,
+.quiz-creation-container input[type="number"]:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    border-color: #007BFF; /* Change to the desired hover color */
+}
+
+/* CSS for the quiz output container */
+.quiz-output-container {
+    margin-top: 20px;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+}
+
+/* Additional styles for the quiz output content (e.g., text, formatting, etc.) */
+/* Your existing CSS styles here */
+
