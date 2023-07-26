@@ -246,3 +246,46 @@ body {
     clear: both;
 }
 
+.question {
+    padding: 20px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.question label {
+    display: block;
+    margin: 5px 0;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.question label:hover {
+    background-color: #f6f6f6;
+}
+
+.question input[type="radio"] {
+    margin-right: 10px;
+}
+
+#submitAnswers {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#submitAnswers:hover {
+    background-color: #0056b3;
+}
+
+.question input[type="radio"]:checked + label {
+    background-color: #e6f7ff;
+    border-color: #007BFF;
+}

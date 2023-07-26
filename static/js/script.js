@@ -39,12 +39,14 @@ function displayQuiz(quizData) {
 
     quizData.questions.forEach((question, index) => {
         if (question.type === "Multiple Choice") {
-            quizHTML += `<div class="question">
-                <p>${question.text}</p>
-                ${question.choices.map((choice, idx) => 
-                `<label><input type="radio" name="q${index}" value="${idx}">${choice}</label>`
-                ).join('')}
-            </div>`;
+			quizHTML += `<div class="question">
+				<p>${question.text}</p>
+				<div class="choices">
+					${question.choices.map((choice, idx) => 
+					`<label><input type="radio" name="q${index}" value="${idx}">${choice}</label>`
+					).join('')}
+				</div>
+			</div>`;
         } else if (question.type === "True/False") {
             quizHTML += `<div class="question">
                 <p>${question.text}</p>
