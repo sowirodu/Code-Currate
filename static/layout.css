@@ -25,7 +25,7 @@ body {
   }
   
 .container {
-    height: 90vh;
+    height: -100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,6 +33,7 @@ body {
 }
 
   .content-section {
+	
 	width: 650px;
     padding: 20px; /* Add some padding to space out the form fields */
     background-color: #fff; /* Optional: Set a background color to differentiate from the main background */
@@ -90,8 +91,8 @@ body {
   
 .navbar {
     display: flex;
-    justify-content: flex-start;
-    padding: 20px; /* Adjust this to increase/decrease the space around your navbar content. */
+	justify-content: space-between;
+    padding: 60px; /* Adjust this to increase/decrease the space around your navbar content. */
 	margin-top: -60px;
 	margin-right: 80px;
 }
@@ -119,4 +120,31 @@ body {
     font-size: 30px;
     font-family: 'Circular Std', sans-serif; /* Always good to have a fallback font. */
     font-weight: 300;
+}
+
+.home-page-code-currate-text5 {
+
+  text-align: right;
+  color: var(--dl-color-gray-black);
+  font-size: 24px;
+  font-style: Book;
+  margin-right: 50px;
+  font-family: Circular Std;
+  font-weight: 300;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.home-page-code-currate-text6 {
+
+  text-align: right;
+  color: rgb(10, 9, 9);
+  font-size: 24px;
+  font-style: Book;
+
+  font-family: Circular Std;
+  font-weight: 300;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
 }

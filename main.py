@@ -1,8 +1,9 @@
-from flask import Flask, render_template, url_for, flash, redirect, request, jsonify
+from flask import Flask, render_template, url_for, flash, redirect, request, jsonify, session
 from flask_behind_proxy import FlaskBehindProxy
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegistrationForm
+from forms import RegistrationForm, loginForm
+
 import requests
 import openai
 
@@ -21,18 +22,30 @@ class User(db.Model):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    form = loginForm()
     if request.method == 'POST':
         user = User.query.filter_by(username=request.form['username']).first()
         if user and check_password_hash(user.password, request.form['password']):
+            session['username'] = user.username
             flash('Logged in successfully!', 'success')
-            return redirect(url_for('/'))
+            return redirect(url_for('main_page'))
         else:
             flash('Login failed. Check your username and password.', 'danger')
-    return render_template('login.html')
+    is_logged_in = 'username' in session
+    return render_template('login.html', form=form, is_logged_in=is_logged_in)
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    flash('You have been logged out.', 'success')
+    return redirect(url_for('main_page'))
+
+
 
 @app.route("/")
 def main_page():
-    return render_template('homepage.html')
+    is_logged_in = 'username' in session
+    return render_template('homepage.html', is_logged_in=is_logged_in)
 
 @app.route('/about-us')
 def about_us():
@@ -54,6 +67,7 @@ def register():
         flash(f'Account created for {form.username.data}!', 'success')
         return redirect(url_for('main_page')) # if so - send to home page
     return render_template('register.html', title='Register', form=form)
+
 
 
 @app.route('/generate-quiz', methods=['POST'])
