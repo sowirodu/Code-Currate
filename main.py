@@ -1,13 +1,34 @@
 from flask import Flask, render_template, url_for, flash, redirect, request, jsonify
 from flask_behind_proxy import FlaskBehindProxy
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
+from forms import RegistrationForm
 import requests
 import openai
 
 app = Flask(__name__)
 proxied = FlaskBehindProxy(app)
 app.config['SECRET_KEY'] = 'e30b92ab25051f1ed6da06292f122baf'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 openai.api_key = "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"
 
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password = db.Column(db.String(120), nullable=False)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        user = User.query.filter_by(username=request.form['username']).first()
+        if user and check_password_hash(user.password, request.form['password']):
+            flash('Logged in successfully!', 'success')
+            return redirect(url_for('/'))
+        else:
+            flash('Login failed. Check your username and password.', 'danger')
+    return render_template('login.html')
 
 @app.route("/")
 def main_page():
@@ -20,6 +41,20 @@ def about_us():
 @app.route('/quiz')
 def quiz():
     return render_template('quiz.html')
+
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit(): # checks if entries are valid
+        hashed_password = generate_password_hash(form.password.data, method='sha256')
+        user = User(username=form.username.data, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+
+        flash(f'Account created for {form.username.data}!', 'success')
+        return redirect(url_for('main_page')) # if so - send to home page
+    return render_template('register.html', title='Register', form=form)
+
 
 @app.route('/generate-quiz', methods=['POST'])
 def generate_quiz():
@@ -43,4 +78,6 @@ def generate_quiz():
 
 
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(debug=True, host="0.0.0.0")

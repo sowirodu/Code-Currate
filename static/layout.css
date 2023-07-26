@@ -1,0 +1,122 @@
+body {
+    background: #fafafa;
+    color: #333333;
+    margin-top: 5rem;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: #444444;
+  }
+  
+  .bg-steel {
+    background-color: #d60e0e;
+  }
+  
+  .site-header .navbar-nav .nav-link {
+    color: #cbd5db;
+  }
+  
+  .site-header .navbar-nav .nav-link:hover {
+    color: #ffffff;
+  }
+  
+  .site-header .navbar-nav .nav-link.active {
+    font-weight: 500;
+  }
+  
+.container {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	
+}
+
+  .content-section {
+	width: 650px;
+    padding: 20px; /* Add some padding to space out the form fields */
+    background-color: #fff; /* Optional: Set a background color to differentiate from the main background */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for depth */
+    border-radius: 5px; /* Optional: Rounds the corners of the form */
+  }
+  
+  .article-title {
+    color: #444444;
+  }
+  
+  a.article-title:hover {
+    color: #428bca;
+    text-decoration: none;
+  }
+  
+  .article-content {
+    white-space: pre-line;
+  }
+  
+  .article-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+  }
+  
+  .article-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3
+  }
+  
+  .article-metadata a:hover {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .article-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+  }
+  
+  .account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .account-heading {
+    font-size: 2.5rem;
+  }
+
+  
+.navbar {
+    display: flex;
+    justify-content: flex-start;
+    padding: 20px; /* Adjust this to increase/decrease the space around your navbar content. */
+	margin-top: -60px;
+	margin-right: 80px;
+}
+
+.home-page-code-currate-logo {
+    display: flex;
+    align-items: center; /* To vertically align the items inside. */
+}
+
+.home-page-code-currate-text {
+  color: linear-gradient(150deg, rgba(4, 103, 255, 1) 0%, rgba(89, 229, 255, 1) 100%);
+  height: auto;
+  font-size: 72px;
+  font-style: Medium;
+  text-align: left;
+  font-family: Gotham Rounded;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+
+.home-page-code-currate-text01 {
+    color: rgb(51, 51, 51);
+    font-size: 30px;
+    font-family: 'Circular Std', sans-serif; /* Always good to have a fallback font. */
+    font-weight: 300;
+}
