@@ -3,16 +3,15 @@ from flask_behind_proxy import FlaskBehindProxy
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from forms import RegistrationForm, loginForm
-
 import requests
 import openai
+import json
 
 app = Flask(__name__)
 proxied = FlaskBehindProxy(app)
 app.config['SECRET_KEY'] = 'e30b92ab25051f1ed6da06292f122baf'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 openai.api_key = "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"
-
 db = SQLAlchemy(app)
 
 class User(db.Model):
@@ -40,8 +39,6 @@ def logout():
     flash('You have been logged out.', 'success')
     return redirect(url_for('main_page'))
 
-
-
 @app.route("/")
 def main_page():
     is_logged_in = 'username' in session
@@ -63,12 +60,9 @@ def register():
         user = User(username=form.username.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
-
         flash(f'Account created for {form.username.data}!', 'success')
         return redirect(url_for('main_page')) # if so - send to home page
     return render_template('register.html', title='Register', form=form)
-
-
 
 @app.route('/generate-quiz', methods=['POST'])
 def generate_quiz():
@@ -78,18 +72,37 @@ def generate_quiz():
     question_type = data.get("questionType")
     num_questions = data.get("numQuestions")
 
-    prompt = f"Generate a {difficulty} level quiz on the topic of {topic} with {num_questions} {question_type} questions."
+    format_text = """ In the following format:
+                    {
+                        "questions": [
+                            {
+                                "type": "Multiple Choice",
+                                "text": "What is the first element in an Array called?",
+                                "choices": ["First Element", "Header", "Index 0", "None of the above"],
+                                "answer": 2
+                            },
+                            {
+                                "type": "True/False",
+                                "text": "Linked List is a linear data structure.",
+                                "answer": true
+                            }
+                        ]
+                    }"""
+
+
+    prompt = f"Generate a {difficulty} level quiz on the topic of {topic} with {num_questions} {question_type} questions." + format_text
 
     response = openai.Completion.create(
-      engine="text-davinci-003",
-      prompt=prompt,
-      max_tokens=500
+        engine="text-davinci-003",
+        prompt=prompt,
+        max_tokens=800
     )
-
-    return jsonify({
-        "quiz": response.choices[0].text.strip()
-    })
-
+    try:
+        # Parse the response text to convert it into a Python dictionary
+        quiz_data = json.loads(response.choices[0].text.strip())
+        return jsonify(quiz_data)
+    except json.JSONDecodeError:
+        return jsonify({"error": "Failed to parse quiz data"}), 500
 
 if __name__ == '__main__':
     with app.app_context():
