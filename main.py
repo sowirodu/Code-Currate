@@ -11,7 +11,7 @@ app = Flask(__name__)
 proxied = FlaskBehindProxy(app)
 app.config['SECRET_KEY'] = 'e30b92ab25051f1ed6da06292f122baf'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
-openai.api_key = "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"
+openai.api_key = ""
 db = SQLAlchemy(app)
 
 class User(db.Model):
